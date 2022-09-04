@@ -8,8 +8,8 @@ import { Actions, Store } from "../../utils/Store";
 
 function ProductPage() {
   const { state, dispatch } = useContext(Store);
-  const { query } = useRouter();
-  const { slug } = query;
+  const router = useRouter();
+  const { slug } = router.query;
 
   const product = data.products.find((product) => product.slug === slug);
 
@@ -30,6 +30,7 @@ function ProductPage() {
       type: Actions.CART_ADD_ITEM,
       payload: { ...product, quantity },
     });
+    router.push("/cart");
   };
 
   return (

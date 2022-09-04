@@ -8,6 +8,7 @@ const initialState = {
 
 export const Actions = {
   CART_ADD_ITEM: "CART_ADD_ITEM",
+  CART_REMOVE_ITEM: "CART_REMOVE_ITEM",
 };
 
 function reducer(state, action) {
@@ -24,6 +25,14 @@ function reducer(state, action) {
           )
         : [...state.cart.cartItems, newItem];
 
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case Actions.CART_REMOVE_ITEM: {
+      const foundIndex = state.cart.cartItems.findIndex(
+        (item) => item.slug === action.payload,
+      );
+      const cartItems = [...state.cart.cartItems];
+      cartItems.splice(foundIndex, 1);
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     default:
