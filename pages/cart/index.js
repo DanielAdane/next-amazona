@@ -5,6 +5,7 @@ import { Actions, Store } from "../../utils/Store";
 import Image from "next/image";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 function CartPage() {
   const router = useRouter();
@@ -123,4 +124,4 @@ function CartPage() {
   );
 }
 
-export default CartPage;
+export default dynamic(() => Promise.resolve(CartPage), { ssr: false });
